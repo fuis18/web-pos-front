@@ -88,11 +88,14 @@ bun add react-router-dom -E
 bun add zustand -E
 
 bunx --bun shadcn@latest init --template vite
-bunx --bun shadcn@latest add form label button
+bunx --bun shadcn@latest add label button
 bunx --bun shadcn@latest add input input-otp
 bunx --bun shadcn@latest add table pagination
 bunx --bun shadcn@latest add dialog button-group
 bunx --bun shadcn@latest add checkbox select
 bunx --bun shadcn@latest add popover dropdown-menu
 bunx --bun shadcn@latest add combobox calendar
+
+bun add xlsx papaparse
+bun add -d @types/papaparse
 ```

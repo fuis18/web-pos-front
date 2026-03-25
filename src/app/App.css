@@ -1,1 +1,101 @@
+.ProductsPage-container,
+.RegistryPage-container {
+	display: grid;
+	grid-template-columns: 1fr min-content;
+	gap: 1rem;
+	padding: 0 1rem;
+}
 
+.RegistryPage-left {
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	max-height: calc(100vh - 140px);
+}
+
+.RegistryPage-tableScroll {
+	flex: 1;
+	min-height: 0;
+	overflow: auto;
+}
+
+.RegistryPage-totalBar {
+	flex: 0 0 auto;
+	padding: 0.5rem 0;
+}
+.ProductsTable,
+.RegistryTable {
+	overflow-y: scroll;
+}
+.RegistryTable-row {
+	display: grid;
+	grid-template-columns: 1fr 5fr 4fr 10fr 4fr 4fr;
+	justify-items: center;
+}
+
+.ProductsTable-row {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: minmax(0, 1fr);
+	justify-items: center;
+}
+
+.ProductsTable-row th:nth-child(2),
+.ProductsTable-row td:nth-child(2) {
+	place-self: start;
+	padding-left: 2rem;
+}
+
+.SalesTable-row {
+	display: grid;
+	grid-template-columns: 1fr 4fr 4fr 2fr 1fr;
+	justify-items: center;
+}
+
+.RegistryTable-row th:nth-child(1),
+.RegistryTable-row td:nth-child(1) {
+	justify-self: center;
+}
+
+th {
+	align-content: center;
+}
+
+.SalesOptions {
+	margin: 0.5rem 1rem;
+	display: flex;
+	justify-content: center;
+}
+
+.form-container,
+.form-container-otp {
+	width: 600px;
+	margin: 50px auto;
+	text-align: center;
+}
+
+.form-content {
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.form-content .form-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.form-source {
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+}
+
+.form-container span {
+	display: flex;
+	gap: 0.5rem;
+	justify-content: center;
+}
