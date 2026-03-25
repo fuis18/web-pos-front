@@ -73,3 +73,26 @@ export default defineConfig([
   },
 ])
 ```
+
+
+```sh
+bun create vite web-pos-front
+cd ./web-pos-front
+
+bun add -D tailwindcss @tailwindcss/vite -E
+bun add -D shadcn-ui -E
+
+bun add @tanstack/react-table -E
+bun add react-hook-form zod -E
+bun add react-router-dom -E
+bun add zustand -E
+
+bunx --bun shadcn@latest init --template vite
+bunx --bun shadcn@latest add form label button
+bunx --bun shadcn@latest add input input-otp
+bunx --bun shadcn@latest add table pagination
+bunx --bun shadcn@latest add dialog button-group
+bunx --bun shadcn@latest add checkbox select
+bunx --bun shadcn@latest add popover dropdown-menu
+bunx --bun shadcn@latest add combobox calendar
+```
