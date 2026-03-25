@@ -1,18 +1,21 @@
-import { insert, select } from "@/database/index.ts";
+import { api } from "@/lib/api";
 import type { CreateUser, UserCredentials } from "../types/users.types";
 import type { User } from "../types/users.types";
 
-export async function getUser(user: UserCredentials) {
-	return select<User>(
-		"SELECT * FROM users WHERE username = ? AND password = ?",
-		[user.username, user.password],
-	);
+// POST /users/login  (or use findByUsername + compare on backend)
+// For now we use the existing backend endpoints:
+// The backend has findByUsername which returns the full user (with password).
+// Authentication logic should eventually move to a dedicated auth module.
+export async function getUser(credentials: UserCredentials): Promise<User[]> {
+	const user = await api.post<User | null>("/users/login", credentials);
+	return user ? [user] : [];
 }
 
-export async function createUser(user: CreateUser) {
-	return insert("INSERT INTO users (id, username, password) VALUES (?, ?, ?)", [
-		user.id,
-		user.username,
-		user.password,
-	]);
+// POST /users
+export async function createUser(user: CreateUser): Promise<number> {
+	const res = await api.post<{ id: string }>("/users", {
+		username: user.username,
+		password: user.password,
+	});
+	return Number(res.id) || 0;
 }

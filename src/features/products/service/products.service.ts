@@ -15,13 +15,7 @@ export const productService = {
 	},
 
 	async findAll(limit: number, offset: number, user: boolean) {
-		const [data, total] = await Promise.all([
-			user
-				? repo.getAllProducts(limit, offset)
-				: repo.getAllProductsActive(limit, offset),
-			user ? repo.getProductsCount() : repo.getProductsCountActive(),
-		]);
-		return { data, total };
+		return repo.findAllPaginated(limit, offset, !user);
 	},
 
 	async exportAll() {
