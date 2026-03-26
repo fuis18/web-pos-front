@@ -1,4 +1,3 @@
-import * as XLSX from "xlsx";
 import { salesService } from "./sales.service";
 import { saveFileAs } from "@/lib/saveFile";
 
@@ -13,6 +12,7 @@ export async function exportSalesExcel(date?: {
 		salesService.exportAllItems(date),
 	]);
 
+	const XLSX = await import("xlsx");
 	const workbook = XLSX.utils.book_new();
 
 	const salesSheet = XLSX.utils.json_to_sheet(sales, {

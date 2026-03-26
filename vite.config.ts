@@ -16,6 +16,18 @@ export default defineConfig({
 			"@": path.resolve(__dirname, "./src"),
 		},
 	},
+	build: {
+		rollupOptions: {
+			output: {
+				manualChunks(id) {
+					if (id.includes("node_modules/react-dom")) return "vendor-react";
+					if (id.includes("node_modules/react/")) return "vendor-react";
+					if (id.includes("node_modules/react-router")) return "vendor-react";
+					if (id.includes("node_modules/@radix-ui")) return "vendor-ui";
+				},
+			},
+		},
+	},
 	server: {
 		proxy: {
 			"/api": {

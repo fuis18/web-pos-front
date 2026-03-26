@@ -1,4 +1,3 @@
-import Papa from "papaparse";
 import { salesService } from "./sales.service";
 import { saveFileAs } from "@/lib/saveFile";
 
@@ -13,6 +12,7 @@ export async function exportSalesCsv(date?: {
 		salesService.exportAllItems(date),
 	]);
 
+	const { default: Papa } = await import("papaparse");
 	const salesCsv = Papa.unparse(sales, {
 		columns: ["id", "date", "total"],
 	});

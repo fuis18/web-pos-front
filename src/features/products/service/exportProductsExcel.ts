@@ -1,10 +1,10 @@
-import * as XLSX from "xlsx";
 import { productService } from "./products.service";
 import { saveFileAs } from "@/lib/saveFile";
 
 export async function exportProductsExcel(): Promise<string | null> {
 	const products = await productService.exportAll();
 
+	const XLSX = await import("xlsx");
 	const worksheet = XLSX.utils.json_to_sheet(products, {
 		header: ["id", "code", "name", "price"],
 	});

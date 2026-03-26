@@ -1,10 +1,10 @@
-import Papa from "papaparse";
 import { productService } from "./products.service";
 import { saveFileAs } from "@/lib/saveFile";
 
 export async function exportProductsCsv(): Promise<string | null> {
 	const products = await productService.exportAll();
 
+	const { default: Papa } = await import("papaparse");
 	const csv = Papa.unparse(products, {
 		columns: ["id", "code", "name", "price"],
 	});
