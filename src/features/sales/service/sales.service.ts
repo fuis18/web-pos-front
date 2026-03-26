@@ -1,4 +1,4 @@
-import * as repo from "../repository/sales.repository";
+import * as repo from "../api/sales.api";
 import type {
 	CreateSale,
 	Sale,
@@ -68,5 +68,14 @@ export const salesService = {
 
 	async deleteSale(saleId: number): Promise<void> {
 		return repo.deleteSale(saleId);
+	},
+
+	async getTotal(date?: {
+		from?: string;
+		to?: string;
+		timeFrom?: string;
+		timeTo?: string;
+	}): Promise<number> {
+		return repo.getSalesTotal(date);
 	},
 };

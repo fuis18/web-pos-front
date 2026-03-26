@@ -1,4 +1,4 @@
-import * as repo from "../repository/users.repository";
+import * as repo from "../api/users.api";
 import type { CreateUser, UserCredentials } from "../types/users.types";
 import { CONFIG } from "../../../constants/config";
 

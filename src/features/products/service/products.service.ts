@@ -1,4 +1,5 @@
-import * as repo from "../repository/products.repository";
+import * as repo from "../api/products.api";
+import type { CreateProduct, UpdateProduct } from "../types/products.types";
 
 export const productService = {
 	async findByCode(code: number) {
@@ -44,5 +45,13 @@ export const productService = {
 
 	async hardDeleteBatch(ids: number[]) {
 		return repo.hardDeleteProducts(ids);
+	},
+
+	async create(product: CreateProduct) {
+		return repo.createProduct(product);
+	},
+
+	async update(id: number, product: UpdateProduct) {
+		return repo.updateProduct(id, product);
 	},
 };

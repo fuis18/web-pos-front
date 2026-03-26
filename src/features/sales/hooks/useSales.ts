@@ -5,7 +5,6 @@ import { salesService } from "../service/sales.service";
 import type { Sale, SaleItem } from "@/features/sales/types/sales.types";
 import { usePagination } from "@/hooks/usePagination";
 import { startOfWeek, endOfWeek, format } from "date-fns";
-import { getSalesTotal } from "../repository/sales.repository";
 
 export function useSales() {
 	// --------------------
@@ -89,7 +88,7 @@ export function useSales() {
 		const [salesData, total, amount, reported] = await Promise.all([
 			salesService.findAll(limit, offset, selectedDate),
 			salesService.count(selectedDate),
-			getSalesTotal(selectedDate),
+			salesService.getTotal(selectedDate),
 			salesService.getReportedSaleIds(),
 		]);
 

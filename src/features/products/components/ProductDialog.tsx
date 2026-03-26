@@ -24,12 +24,7 @@ import {
 	type ProductFormValues,
 } from "@/features/products/types/products.types";
 
-import {
-	createProduct,
-	updateProduct,
-	getProductByCode,
-	getProductByName,
-} from "@/features/products/repository/products.repository";
+import { productService } from "@/features/products/service/products.service";
 
 interface ProductDialogProps {
 	product?: Product;
@@ -71,13 +66,13 @@ const ProductDialog = ({
 		try {
 			const parsed = productSchema.parse(data);
 
-			const existingByCode = await getProductByCode(parsed.code);
+			const existingByCode = await productService.findByCode(parsed.code);
 			if (existingByCode && (!isEdit || existingByCode.id !== product?.id)) {
 				form.setError("code", { type: "manual", message: "Código existente" });
 				return;
 			}
 
-			const existingByName = await getProductByName(parsed.name);
+			const existingByName = await productService.findByName(parsed.name);
 			if (existingByName && (!isEdit || existingByName.id !== product?.id)) {
 				form.setError("name", { type: "manual", message: "Nombre existente" });
 				return;
@@ -97,9 +92,9 @@ const ProductDialog = ({
 					return;
 				}
 
-				await updateProduct(product.id, changes);
+				await productService.update(product.id, changes);
 			} else {
-				await createProduct(parsed);
+				await productService.create(parsed);
 			}
 
 			form.reset();

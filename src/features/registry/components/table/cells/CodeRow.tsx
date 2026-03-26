@@ -1,6 +1,6 @@
 // src/features/registry/components/table/CodeRow.tsx
 import { Input } from "@/components/ui/input";
-import { getProductByCode } from "@/features/products/repository/products.repository";
+import { productService } from "@/features/products/service/products.service";
 import type { Registry } from "@/features/registry/types/registry.types";
 import type { CellContext } from "@tanstack/react-table";
 import useFocusableCell from "../hooks/useFocusableCell";
@@ -51,7 +51,7 @@ export default function CodeCell({
 					const code = Number(inputValue);
 					if (Number.isNaN(code)) return;
 
-					const product = await getProductByCode(code);
+					const product = await productService.findByCode(code);
 
 					if (!product) return;
 

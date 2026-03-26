@@ -1,7 +1,7 @@
 // src\features\registry\service\registryService.ts
 import type { Registry } from "../types/registry.types";
 import type { CreateSale } from "@/features/sales/types/sales.types";
-import { createSale } from "@/features/sales/repository/sales.repository";
+import { salesService } from "@/features/sales/service/sales.service";
 
 export const buildSaleFromRegistry = (
 	rows: Registry[],
@@ -33,7 +33,7 @@ export const submitRegistrySale = async (
 
 	if (!sale) return false;
 
-	await createSale(sale);
+	await salesService.create(sale);
 
 	return true;
 };
