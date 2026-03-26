@@ -40,6 +40,7 @@ const SaleDialog = ({
 	isAdmin,
 	onSalesUpdated,
 }: SaleDialogProps) => {
+	"use no memo";
 	const [report, setReport] = useState<SaleReport | null>(null);
 	const [reportDialogOpen, setReportDialogOpen] = useState(false);
 	const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);

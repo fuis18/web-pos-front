@@ -6,17 +6,11 @@ async function request<T>(
 	body?: object,
 ): Promise<T> {
 	const fullUrl = `${CONFIG.API_BASE}${url}`;
-	console.log(`[api] ${method} ${fullUrl}`);
-	console.log(`[api] API_BASE = "${CONFIG.API_BASE}"`);
 	const res = await fetch(fullUrl, {
 		method,
 		headers: body !== undefined ? { "Content-Type": "application/json" } : {},
 		body: body !== undefined ? JSON.stringify(body) : undefined,
 	});
-
-	console.log(
-		`[api] response status=${res.status}, content-type=${res.headers.get("content-type")}`,
-	);
 
 	if (!res.ok) {
 		const text = await res.text();
@@ -25,7 +19,6 @@ async function request<T>(
 	}
 
 	const text = await res.text();
-	console.log(`[api] response body (first 200 chars):`, text.slice(0, 200));
 	return JSON.parse(text) as T;
 }
 

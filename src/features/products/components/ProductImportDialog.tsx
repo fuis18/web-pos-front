@@ -2,7 +2,13 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { productService } from "@/features/products/service/products.service";
 import { parseProductsFile } from "../service/parseProductsFile";
@@ -26,6 +32,7 @@ const ImportDialog = ({
 	onFileUpload,
 	onImportSuccess,
 }: ImportDialogProps) => {
+	"use no memo";
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [open, setOpen] = useState(false);
 	const [file, setFile] = useState<File | null>(null);
@@ -82,26 +89,37 @@ const ImportDialog = ({
 				const code = Number(row.code);
 				const name = row.name;
 				const price = Number(row.price);
+				console.log("[Import] Processing product:", { code, name, price });
+
 				const existing = await productService.findByCode(code);
+				console.log("[Import] Existing product:", existing);
 
 				if (existing) {
 					const sameName = existing.name === name;
 					const samePrice = existing.price === price;
 
 					if (sameName && samePrice) {
+						console.log("[Import] Skipping unchanged product");
 						skipped++;
 						continue;
 					}
 
+					console.log("[Import] Updating product:", existing.id, {
+						...(!sameName && { name }),
+						...(!samePrice && { price }),
+					});
 					await productService.update(existing.id, {
 						...(!sameName && { name }),
 						...(!samePrice && { price }),
 					});
+					console.log("[Import] Product updated successfully");
 					updated++;
 					continue;
 				}
 
+				console.log("[Import] Creating new product:", { code, name, price });
 				await productService.create({ code, name, price });
+				console.log("[Import] Product created successfully");
 				imported++;
 			}
 
@@ -124,6 +142,9 @@ const ImportDialog = ({
 			<DialogTrigger asChild>{children}</DialogTrigger>
 
 			<DialogContent className="max-w-md">
+				<DialogHeader>
+					<DialogTitle>Importar productos</DialogTitle>
+				</DialogHeader>
 				<div
 					onDragOver={handleDragOver}
 					onDragLeave={handleDragLeave}

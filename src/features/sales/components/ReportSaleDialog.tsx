@@ -23,6 +23,7 @@ const ReportSaleDialog = ({
 	onOpenChange,
 	onSubmit,
 }: ReportSaleDialogProps) => {
+	"use no memo";
 	const [reason, setReason] = useState("");
 
 	const canSubmit = reason.trim().length >= MIN_REASON_LENGTH;
