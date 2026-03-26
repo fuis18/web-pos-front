@@ -45,14 +45,17 @@ const ProductsOptions = ({
 				<ProductDialog onSuccess={loadProducts}>
 					<Button>Crear</Button>
 				</ProductDialog>
+				{user && (
+					<>
+						<ImportDialog onImportSuccess={loadProducts}>
+							<Button variant="outline">Importar</Button>
+						</ImportDialog>
 
-				<ImportDialog onImportSuccess={loadProducts}>
-					<Button variant="outline">Importar</Button>
-				</ImportDialog>
-
-				<ProductExportDialog>
-					<Button variant="outline">Exportar</Button>
-				</ProductExportDialog>
+						<ProductExportDialog>
+							<Button variant="outline">Exportar</Button>
+						</ProductExportDialog>
+					</>
+				)}
 			</ButtonGroup>
 
 			{user && hasSelection && (

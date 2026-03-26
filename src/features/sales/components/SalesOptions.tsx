@@ -13,6 +13,7 @@ import type { DateRange } from "react-day-picker";
 import { format, startOfWeek, endOfWeek, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import SalesExportDialog from "./SalesExportDialog";
+import { useUserStore } from "@/store/userStore";
 
 interface SalesOptionsProps {
 	setPage: (page: number) => void;
@@ -56,6 +57,7 @@ const SalesOptions = ({
 }: SalesOptionsProps) => {
 	const [open, setOpen] = useState(false);
 	const [openTime, setOpenTime] = useState(false);
+	const { user } = useUserStore();
 	const [date, setDate] = useState<DateRange | undefined>(() => {
 		if (selectedDate?.from && selectedDate?.to) {
 			return {
@@ -171,9 +173,11 @@ const SalesOptions = ({
 						</div>
 					</PopoverContent>
 				</Popover>
-				<SalesExportDialog dateRange={selectedDate}>
-					<Button variant="outline">Exportar</Button>
-				</SalesExportDialog>
+				{user && (
+					<SalesExportDialog dateRange={selectedDate}>
+						<Button variant="outline">Exportar</Button>
+					</SalesExportDialog>
+				)}
 			</div>
 		</div>
 	);
