@@ -78,6 +78,7 @@ export const getSaleReport = (saleId: number) =>
 	api.get<SaleReport | null>(`/sales/${saleId}/report`);
 
 export const cancelSaleReport = (saleId: number) =>
-	api.delete(`/sales/${saleId}/report`);
+	api.delete<void>(`/sales/${saleId}/report`);
 
-export const deleteSale = (saleId: number) => api.delete(`/sales/${saleId}`);
+export const deleteSale = (saleId: number) =>
+	api.delete<void>(`/sales/${saleId}`);

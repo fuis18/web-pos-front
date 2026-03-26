@@ -35,27 +35,28 @@ export const createProduct = async (product: CreateProduct) => {
 };
 
 export const updateProduct = (id: number, product: UpdateProduct) =>
-	api.patch(`/products/${id}`, product);
+	api.patch<void>(`/products/${id}`, product);
 
 export const softDeleteProduct = (id: number) =>
-	api.patch(`/products/${id}/soft-delete`);
+	api.patch<void>(`/products/${id}/soft-delete`);
 
 export const reactivateProduct = (id: number) =>
-	api.patch(`/products/${id}/reactivate`);
+	api.patch<void>(`/products/${id}/reactivate`);
 
-export const hardDeleteProduct = (id: number) => api.delete(`/products/${id}`);
+export const hardDeleteProduct = (id: number) =>
+	api.delete<void>(`/products/${id}`);
 
 /* ---------- Batch ---------- */
 
 export const softDeleteProducts = (ids: number[]) =>
 	ids.length
-		? api.patch("/products/batch/soft-delete", { ids })
+		? api.patch<void>("/products/batch/soft-delete", { ids })
 		: Promise.resolve();
 
 export const reactivateProducts = (ids: number[]) =>
 	ids.length
-		? api.patch("/products/batch/reactivate", { ids })
+		? api.patch<void>("/products/batch/reactivate", { ids })
 		: Promise.resolve();
 
 export const hardDeleteProducts = (ids: number[]) =>
-	ids.length ? api.delete("/products/batch", { ids }) : Promise.resolve();
+	ids.length ? api.delete<void>("/products/batch", { ids }) : Promise.resolve();
