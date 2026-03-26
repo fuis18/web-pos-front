@@ -89,37 +89,27 @@ const ImportDialog = ({
 				const code = Number(row.code);
 				const name = row.name;
 				const price = Number(row.price);
-				console.log("[Import] Processing product:", { code, name, price });
 
 				const existing = await productService.findByCode(code);
-				console.log("[Import] Existing product:", existing);
 
 				if (existing) {
 					const sameName = existing.name === name;
 					const samePrice = existing.price === price;
 
 					if (sameName && samePrice) {
-						console.log("[Import] Skipping unchanged product");
 						skipped++;
 						continue;
 					}
 
-					console.log("[Import] Updating product:", existing.id, {
-						...(!sameName && { name }),
-						...(!samePrice && { price }),
-					});
 					await productService.update(existing.id, {
 						...(!sameName && { name }),
 						...(!samePrice && { price }),
 					});
-					console.log("[Import] Product updated successfully");
 					updated++;
 					continue;
 				}
 
-				console.log("[Import] Creating new product:", { code, name, price });
 				await productService.create({ code, name, price });
-				console.log("[Import] Product created successfully");
 				imported++;
 			}
 
