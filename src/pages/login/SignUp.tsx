@@ -60,6 +60,7 @@ const SignUp = () => {
 					<Input
 						id="username"
 						type="text"
+						autoComplete="username"
 						{...form.register("username", {
 							onChange: () => form.clearErrors("root"),
 						})}
@@ -75,6 +76,7 @@ const SignUp = () => {
 					<Input
 						id="password"
 						type="password"
+						autoComplete="current-password"
 						{...form.register("password", {
 							onChange: () => form.clearErrors("root"),
 						})}
@@ -101,7 +103,9 @@ const SignUp = () => {
 							variant="outline"
 							type="button"
 							disabled={!canGoToLogin}
-							onClick={() => navigate("/login")}
+							onClick={() => {
+								navigate("/login");
+							}}
 						>
 							Volver
 						</Button>

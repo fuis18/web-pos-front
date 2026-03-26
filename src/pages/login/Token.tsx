@@ -16,9 +16,12 @@ import {
 	InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
+import { useUserStore } from "@/store/userStore";
 
 const Token = () => {
 	const navigate = useNavigate();
+	const { setToken } = useUserStore();
+
 	const userService = createUserService({
 		tokenValidator: (token) => token === CONFIG.TOKEN,
 	});
@@ -40,6 +43,7 @@ const Token = () => {
 
 			if (token) {
 				form.reset();
+				setToken(true);
 				navigate("/login/signup");
 			} else {
 				form.setError("root", {

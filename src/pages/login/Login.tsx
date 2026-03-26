@@ -66,6 +66,7 @@ const Login = () => {
 					<Input
 						id="username"
 						type="text"
+						autoComplete="username"
 						{...form.register("username", {
 							onChange: () => form.clearErrors("root"),
 						})}
@@ -81,6 +82,7 @@ const Login = () => {
 					<Input
 						id="password"
 						type="password"
+						autoComplete="current-password"
 						{...form.register("password", {
 							onChange: () => form.clearErrors("root"),
 						})}

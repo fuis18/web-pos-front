@@ -14,6 +14,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			"@": path.resolve(__dirname, "./src"),
+			"@/contants": path.resolve(__dirname, "./src/constants"),
 		},
 	},
 	build: {
