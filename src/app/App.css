@@ -40,6 +40,11 @@
 	justify-items: center;
 }
 
+.ProductsTable-row th:nth-child(1),
+.ProductsTable-row td:nth-child(1) {
+	align-content: center;
+}
+
 .ProductsTable-row th:nth-child(2),
 .ProductsTable-row td:nth-child(2) {
 	place-self: start;
@@ -54,7 +59,7 @@
 
 .RegistryTable-row th:nth-child(1),
 .RegistryTable-row td:nth-child(1) {
-	justify-self: center;
+	align-content: center;
 }
 
 th {

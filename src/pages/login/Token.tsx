@@ -64,13 +64,15 @@ const Token = () => {
 	return (
 		<div className="form-container-otp">
 			<form className="form-content" onSubmit={form.handleSubmit(onSubmit)}>
-				<div className="justify-center">
-					<Label>Token</Label>
+				<div className="flex flex-col gap-5">
+					<Label className="form-field" htmlFor="signup">
+						Token
+					</Label>
 					<Controller
 						control={form.control}
 						name="token"
 						render={({ field }) => (
-							<InputOTP maxLength={6} {...field}>
+							<InputOTP maxLength={6} {...field} id="signup">
 								<InputOTPGroup>
 									<InputOTPSlot index={0} />
 									<InputOTPSlot index={1} />
