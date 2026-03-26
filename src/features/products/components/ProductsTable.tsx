@@ -16,6 +16,7 @@ const ProductsTable = ({
 	meta,
 	onSelectionChange,
 }: ProductsTableProps) => {
+	console.log("[ProductsTable] render, data:", data);
 	const table = useProductsTable({ data, meta, onSelectionChange });
 
 	return (

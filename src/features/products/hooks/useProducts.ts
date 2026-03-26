@@ -18,7 +18,13 @@ const useProducts = () => {
 	const offset = (page - 1) * limit;
 
 	const reloadProducts = async () => {
+		console.log("[useProducts] reloadProducts called", {
+			limit,
+			offset,
+			user: !!user,
+		});
 		const { data, total } = await productService.findAll(limit, offset, !!user);
+		console.log("[useProducts] reloadProducts result", { data, total });
 
 		setProducts(data);
 		setTotalPages(Math.ceil(total / limit));
@@ -69,14 +75,24 @@ const useProducts = () => {
 	// --------------------
 	useEffect(() => {
 		const fetchProducts = async () => {
-			const { data, total } = await productService.findAll(
+			console.log("[useProducts] fetchProducts effect", {
 				limit,
 				offset,
-				!!user,
-			);
+				user: !!user,
+			});
+			try {
+				const { data, total } = await productService.findAll(
+					limit,
+					offset,
+					!!user,
+				);
+				console.log("[useProducts] fetchProducts result", { data, total });
 
-			setProducts(data);
-			setTotalPages(Math.ceil(total / limit));
+				setProducts(data);
+				setTotalPages(Math.ceil(total / limit));
+			} catch (err) {
+				console.error("[useProducts] fetchProducts ERROR", err);
+			}
 		};
 
 		fetchProducts();
