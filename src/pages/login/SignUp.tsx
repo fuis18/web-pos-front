@@ -27,6 +27,8 @@ const SignUp = () => {
 		},
 	});
 
+	const { isSubmitting } = form.formState;
+
 	const onSubmit: SubmitHandler<FormType> = async (data) => {
 		try {
 			setSuccessMessage("");
@@ -47,7 +49,7 @@ const SignUp = () => {
 				type: "server",
 				message:
 					"No se pudo realizar el registro. " +
-					(error instanceof Error ? error : ""),
+					(error instanceof Error ? error.message : ""),
 			});
 		}
 	};
@@ -97,7 +99,9 @@ const SignUp = () => {
 						</p>
 					)}
 					<span>
-						<Button type="submit">Sign Up</Button>
+						<Button type="submit" disabled={isSubmitting}>
+							{isSubmitting ? "Registrando..." : "Sign Up"}
+						</Button>
 						<Button
 							className="ml-2"
 							variant="outline"
