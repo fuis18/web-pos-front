@@ -17,6 +17,7 @@ const RegistryTable = ({
 	meta,
 	onSelectionChange,
 }: RegistryTableProps) => {
+	"use no memo";
 	const table = useRegistryTable({ data, meta, onSelectionChange });
 
 	return (

@@ -13,6 +13,7 @@ const useProductsTable = ({
 	meta,
 	onSelectionChange,
 }: ProductsTableProps) => {
+	"use no memo";
 	const { user } = useUserStore();
 	const hasUser = !!user;
 	const columns = getColumns(hasUser);

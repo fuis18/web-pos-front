@@ -16,8 +16,14 @@ const ProductsTable = ({
 	meta,
 	onSelectionChange,
 }: ProductsTableProps) => {
+	"use no memo";
 	console.log("[ProductsTable] render, data:", data);
 	const table = useProductsTable({ data, meta, onSelectionChange });
+	console.log(
+		"[ProductsTable] rows:",
+		table.getRowModel().rows.length,
+		table.getRowModel().rows,
+	);
 
 	return (
 		<Table className="ProductsTable">

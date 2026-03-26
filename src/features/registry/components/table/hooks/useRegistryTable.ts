@@ -12,6 +12,7 @@ const useRegistryTable = ({
 	meta,
 	onSelectionChange,
 }: RegistryTableProps) => {
+	"use no memo";
 	const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
 	// eslint-disable-next-line react-hooks/incompatible-library
