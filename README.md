@@ -34,6 +34,7 @@ Interfaz tipo **POS (Point of Sale)** para la gestión de ventas y productos, pe
 Este proyecto lo inicie como una aplicación para un familiar y cuando anunciaste el hackathon, se me ocurrió dividirla para el VPS (web).
 Así que estuve trabajando en ella antes de anunciar el hackathon, pero recién la pude terminar.
 [APP POS](https://github.com/fuis18/app-pos)
+Incluso hace poco para pude hacer un video de demostración para la app: https://youtu.be/bkMcnGSBTRg
 
 ## Breve historia para MIDU
 
