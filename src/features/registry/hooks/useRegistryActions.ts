@@ -70,7 +70,7 @@ export const useRegistryActions = (
 	) => {
 		setData((prev) => {
 			const existingIndex = prev.findIndex(
-				(r, i) => i !== rowIndex && r.product_id === product.id,
+				(r, i) => i !== rowIndex && r.productId === product.id,
 			);
 
 			// 🟢 YA EXISTE → sumar cantidad y limpiar fila actual

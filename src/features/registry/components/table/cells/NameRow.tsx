@@ -54,7 +54,7 @@ export default function NameCell({
 						const hasValidRows = table
 							.getRowModel()
 							.rows.some(
-								(r) => r.original.product_id !== null && r.index !== row.index,
+								(r) => r.original.productId !== null && r.index !== row.index,
 							);
 
 						if (hasValidRows) {
