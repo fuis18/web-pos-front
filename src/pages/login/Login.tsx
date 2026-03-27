@@ -52,8 +52,7 @@ const Login = () => {
 			form.setError("root", {
 				type: "server",
 				message:
-					"No se pudo realizar el login. " +
-					(error instanceof Error ? error : ""),
+					"No se pudo realizar el login. " + (error instanceof Error ? "" : ""),
 			});
 		}
 	};
