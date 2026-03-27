@@ -3,7 +3,7 @@ async function request<T>(
 	url: string,
 	body?: object,
 ): Promise<T> {
-	const fullUrl = `${import.meta.env.BASE_URL}${url}`;
+	const fullUrl = `${import.meta.env.VITE_API_URL}${url}`;
 	const res = await fetch(fullUrl, {
 		method,
 		headers: body !== undefined ? { "Content-Type": "application/json" } : {},
