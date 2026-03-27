@@ -4,7 +4,7 @@ async function request<T>(
 	body?: object,
 ): Promise<T> {
 	console.log("3.4");
-	const fullUrl = `${import.meta.env.VITE_API_URL}${url}`;
+	const fullUrl = `http://web-pos-backend-vxrrd4-1172b8-144-225-147-25.traefik.me${url}`;
 	console.log(fullUrl);
 	const res = await fetch(fullUrl, {
 		method,
