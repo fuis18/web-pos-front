@@ -5,7 +5,6 @@ import { userToken } from "@/features/users/types/userSchema";
 import type { TokenType } from "@/features/users/types/userSchema";
 import type { SubmitHandler } from "react-hook-form";
 
-import { createUserService } from "@/features/users/service/users.service";
 import { useNavigate } from "react-router";
 import { CONFIG } from "@/constants/config";
 import { Label } from "@/components/ui/label";
@@ -22,10 +21,6 @@ const Token = () => {
 	const navigate = useNavigate();
 	const { setToken } = useUserStore();
 
-	const userService = createUserService({
-		tokenValidator: (token) => token === CONFIG.TOKEN,
-	});
-
 	const form = useForm<TokenType>({
 		resolver: zodResolver(userToken),
 		defaultValues: {
@@ -37,9 +32,7 @@ const Token = () => {
 		try {
 			const parsed = userToken.parse(data);
 
-			const token = await userService.getToken({
-				token: parsed.token,
-			});
+			const token = parsed.token === CONFIG.TOKEN;
 
 			if (token) {
 				form.reset();

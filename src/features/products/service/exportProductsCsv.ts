@@ -1,8 +1,8 @@
-import { productService } from "./products.service";
+import { getAllProductsForExport } from "../api/products.api";
 import { saveFileAs } from "@/lib/saveFile";
 
 export async function exportProductsCsv(): Promise<string | null> {
-	const products = await productService.exportAll();
+	const products = await getAllProductsForExport();
 
 	const { default: Papa } = await import("papaparse");
 	const csv = Papa.unparse(products, {

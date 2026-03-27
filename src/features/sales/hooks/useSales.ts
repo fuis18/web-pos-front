@@ -1,7 +1,14 @@
 // src/features/sales/useSales.ts
 import { useCallback, useEffect, useState } from "react";
 import { CONFIG } from "@/constants/config";
-import { salesService } from "../service/sales.service";
+import {
+	getAllSales,
+	getSalesCount,
+	getSalesTotal,
+	getReportedSaleIds,
+	getSaleItems,
+	createSaleReport,
+} from "../api/sales.api";
 import type { Sale, SaleItem } from "@/features/sales/types/sales.types";
 import { usePagination } from "@/hooks/usePagination";
 import { startOfWeek, endOfWeek, format } from "date-fns";
@@ -61,7 +68,7 @@ export function useSales() {
 		setDialogOpen(true);
 		setSelectedSaleItems(null); // loading state
 
-		const items = await salesService.getItems(saleId);
+		const items = await getSaleItems(saleId);
 		setSelectedSaleItems(items);
 	};
 
@@ -86,10 +93,10 @@ export function useSales() {
 
 	const refreshSales = useCallback(async () => {
 		const [salesData, total, amount, reported] = await Promise.all([
-			salesService.findAll(limit, offset, selectedDate),
-			salesService.count(selectedDate),
-			salesService.getTotal(selectedDate),
-			salesService.getReportedSaleIds(),
+			getAllSales(limit, offset, selectedDate),
+			getSalesCount(selectedDate),
+			getSalesTotal(selectedDate),
+			getReportedSaleIds(),
 		]);
 
 		setSales(salesData);
@@ -100,7 +107,7 @@ export function useSales() {
 
 	const submitReport = async (reason: string) => {
 		if (reportingSaleId === null) return;
-		await salesService.reportSale(reportingSaleId, reason);
+		await createSaleReport(reportingSaleId, reason);
 		closeReportDialog();
 		await refreshSales();
 	};

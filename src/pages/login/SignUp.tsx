@@ -5,16 +5,11 @@ import type { FormType } from "@/features/users/types/userSchema";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema } from "@/features/users/types/userSchema";
-import { createUserService } from "@/features/users/service/users.service";
-import { CONFIG } from "@/constants/config";
+import { createUser } from "@/features/users/api/users.api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-	const userService = createUserService({
-		tokenValidator: (token) => token === CONFIG.TOKEN,
-	});
-
 	const [canGoToLogin, setCanGoToLogin] = useState(false);
 	const [successMessage, setSuccessMessage] = useState("");
 	const navigate = useNavigate();
@@ -33,7 +28,7 @@ const SignUp = () => {
 		try {
 			setSuccessMessage("");
 			const parsed = userSchema.parse(data);
-			await userService.createUser({
+			await createUser({
 				username: parsed.username,
 				password: parsed.password,
 			});

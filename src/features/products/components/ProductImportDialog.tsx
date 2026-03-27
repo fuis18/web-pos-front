@@ -10,7 +10,11 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { productService } from "@/features/products/service/products.service";
+import {
+	getProductByCode,
+	createProduct,
+	updateProduct,
+} from "@/features/products/api/products.api";
 import { parseProductsFile } from "../service/parseProductsFile";
 
 interface ImportDialogProps {
@@ -90,7 +94,7 @@ const ImportDialog = ({
 				const name = row.name;
 				const price = Number(row.price);
 
-				const existing = await productService.findByCode(code);
+				const existing = await getProductByCode(code);
 
 				if (existing) {
 					const sameName = existing.name === name;
@@ -101,7 +105,7 @@ const ImportDialog = ({
 						continue;
 					}
 
-					await productService.update(existing.id, {
+					await updateProduct(existing.id, {
 						...(!sameName && { name }),
 						...(!samePrice && { price }),
 					});
@@ -109,7 +113,7 @@ const ImportDialog = ({
 					continue;
 				}
 
-				await productService.create({ code, name, price });
+				await createProduct({ code, name, price });
 				imported++;
 			}
 

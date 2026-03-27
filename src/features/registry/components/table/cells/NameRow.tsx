@@ -6,7 +6,10 @@ import {
 	ComboboxItem,
 	ComboboxList,
 } from "@/components/ui/combobox";
-import { productService } from "@/features/products/service/products.service";
+import {
+	getProductByLike,
+	getProductByName,
+} from "@/features/products/api/products.api";
 import type { ProductListItem } from "@/features/products/types/products.types";
 import type { Registry } from "@/features/registry/types/registry.types";
 import type { CellContext } from "@tanstack/react-table";
@@ -31,7 +34,7 @@ export default function NameCell({
 	useEffect(() => {
 		if (!value || value === "") return;
 
-		productService.findByLike(value).then(setItems);
+		getProductByLike(value).then(setItems);
 	}, [value]);
 
 	const confirmProduct = (item: ProductListItem, createRow = true) => {
@@ -64,7 +67,7 @@ export default function NameCell({
 					}
 
 					if (items.length > 0) return;
-					const product = await productService.findByName(value);
+					const product = await getProductByName(value);
 					if (!product) return;
 					confirmProduct(product);
 				}}

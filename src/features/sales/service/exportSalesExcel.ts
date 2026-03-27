@@ -1,4 +1,7 @@
-import { salesService } from "./sales.service";
+import {
+	getAllSaleItemsForExport,
+	getAllSalesForExport,
+} from "../api/sales.api";
 import { saveFileAs } from "@/lib/saveFile";
 
 export async function exportSalesExcel(date?: {
@@ -8,8 +11,8 @@ export async function exportSalesExcel(date?: {
 	timeTo?: string;
 }): Promise<string | null> {
 	const [sales, items] = await Promise.all([
-		salesService.exportAll(date),
-		salesService.exportAllItems(date),
+		getAllSalesForExport(date),
+		getAllSaleItemsForExport(date),
 	]);
 
 	const XLSX = await import("xlsx");

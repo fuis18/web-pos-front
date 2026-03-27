@@ -2,7 +2,15 @@ import { useEffect, useState } from "react";
 import type { Product } from "../types/products.types";
 import { CONFIG } from "@/constants/config";
 import { usePagination } from "@/hooks/usePagination";
-import { productService } from "../service/products.service";
+import {
+	findAllPaginated,
+	softDeleteProduct,
+	hardDeleteProduct,
+	reactivateProduct,
+	softDeleteProducts,
+	reactivateProducts,
+	hardDeleteProducts,
+} from "../api/products.api";
 import { useUserStore } from "@/store/userStore";
 
 const useProducts = () => {
@@ -18,7 +26,7 @@ const useProducts = () => {
 	const offset = (page - 1) * limit;
 
 	const reloadProducts = async () => {
-		const { data, total } = await productService.findAll(limit, offset, !!user);
+		const { data, total } = await findAllPaginated(limit, offset, !!user);
 
 		setProducts(data);
 		setTotalPages(Math.ceil(total / limit));
@@ -32,17 +40,17 @@ const useProducts = () => {
 	// ACTIONS
 	// --------------------
 	const handleSoftDelete = async (id: number) => {
-		await productService.softDelete(id);
+		await softDeleteProduct(id);
 		reloadProducts();
 	};
 
 	const handleHardDelete = async (id: number) => {
-		await productService.hardDelete(id);
+		await hardDeleteProduct(id);
 		reloadProducts();
 	};
 
 	const handleReactivate = async (id: number) => {
-		await productService.reactive(id);
+		await reactivateProduct(id);
 		reloadProducts();
 	};
 
@@ -50,17 +58,17 @@ const useProducts = () => {
 	// BATCH ACTIONS
 	// --------------------
 	const handleBatchSoftDelete = async (ids: number[]) => {
-		await productService.softDeleteBatch(ids);
+		await softDeleteProducts(ids);
 		reloadProducts();
 	};
 
 	const handleBatchReactivate = async (ids: number[]) => {
-		await productService.reactiveBatch(ids);
+		await reactivateProducts(ids);
 		reloadProducts();
 	};
 
 	const handleBatchHardDelete = async (ids: number[]) => {
-		await productService.hardDeleteBatch(ids);
+		await hardDeleteProducts(ids);
 		reloadProducts();
 	};
 
@@ -70,11 +78,7 @@ const useProducts = () => {
 	useEffect(() => {
 		const fetchProducts = async () => {
 			try {
-				const { data, total } = await productService.findAll(
-					limit,
-					offset,
-					!!user,
-				);
+				const { data, total } = await findAllPaginated(limit, offset, !!user);
 
 				setProducts(data);
 				setTotalPages(Math.ceil(total / limit));

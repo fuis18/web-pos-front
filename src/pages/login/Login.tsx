@@ -10,15 +10,11 @@ import { useState } from "react";
 import { userSchema } from "@/features/users/types/userSchema";
 import type { FormType } from "@/features/users/types/userSchema";
 import type { SubmitHandler } from "react-hook-form";
-import { createUserService } from "@/features/users/service/users.service";
+import { getUser } from "@/features/users/api/users.api";
 import { useUserStore } from "@/store/userStore";
 import { CONFIG } from "@/constants/config";
 
 const Login = () => {
-	const userService = createUserService({
-		tokenValidator: (token) => token === CONFIG.TOKEN,
-	});
-
 	const [successMessage, setSuccessMessage] = useState("");
 
 	const form = useForm<FormType>({
@@ -34,7 +30,7 @@ const Login = () => {
 			setSuccessMessage("");
 			const parsed = userSchema.parse(data);
 
-			const user = await userService.getUser({
+			const user = await getUser({
 				username: parsed.username,
 				password: parsed.password,
 			});

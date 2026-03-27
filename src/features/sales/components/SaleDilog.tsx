@@ -19,7 +19,11 @@ import {
 
 import { Button } from "@/components/ui/button";
 import type { SaleItem, SaleReport } from "@/features/sales/types/sales.types";
-import { salesService } from "@/features/sales/service/sales.service";
+import {
+	getSaleReport,
+	cancelSaleReport,
+	deleteSale,
+} from "@/features/sales/api/sales.api";
 
 interface SaleDialogProps {
 	open: boolean;
@@ -52,7 +56,7 @@ const SaleDialog = ({
 		if (!open || !isReported || saleId === null) return;
 
 		let cancelled = false;
-		salesService.getSaleReport(saleId).then((r) => {
+		getSaleReport(saleId).then((r) => {
 			if (!cancelled) setReport(r);
 		});
 		return () => {
@@ -71,7 +75,7 @@ const SaleDialog = ({
 		if (saleId === null) return;
 		setActionLoading("cancelReport");
 		try {
-			await salesService.cancelSaleReport(saleId);
+		await cancelSaleReport(saleId);
 			setReport(null);
 			setReportDialogOpen(false);
 			onOpenChange(false);
@@ -86,7 +90,7 @@ const SaleDialog = ({
 
 		setActionLoading("deleteSale");
 		try {
-			await salesService.deleteSale(saleId);
+		await deleteSale(saleId);
 			setReport(null);
 			setConfirmDeleteOpen(false);
 			setReportDialogOpen(false);
