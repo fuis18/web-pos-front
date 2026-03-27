@@ -1,11 +1,9 @@
-import { CONFIG } from "@/constants/config";
-
 async function request<T>(
 	method: string,
 	url: string,
 	body?: object,
 ): Promise<T> {
-	const fullUrl = `${CONFIG.API_BASE}${url}`;
+	const fullUrl = `${import.meta.env.BASE_URL}${url}`;
 	const res = await fetch(fullUrl, {
 		method,
 		headers: body !== undefined ? { "Content-Type": "application/json" } : {},
@@ -36,6 +34,7 @@ export const api = {
 		return request<T>("GET", url + toQuery(params ?? {}));
 	},
 	post<T>(url: string, body?: object): Promise<T> {
+		console.log("3.2");
 		return request<T>("POST", url, body);
 	},
 	patch<T>(url: string, body?: object): Promise<T> {
