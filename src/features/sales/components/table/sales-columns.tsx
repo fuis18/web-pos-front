@@ -25,7 +25,7 @@ const baseColumns: ColumnDef<Sale>[] = [
 			</Button>
 		),
 		cell: ({ row }) => {
-			const date = new Date(row.original.date + "Z");
+			const date = new Date(row.original.date);
 			return date.toLocaleTimeString("es-PE", {
 				timeZone: "America/Lima",
 				hour: "2-digit",
