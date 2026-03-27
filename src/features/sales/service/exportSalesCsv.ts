@@ -20,11 +20,11 @@ export async function exportSalesCsv(date?: {
 		columns: [
 			"id",
 			"sale_id",
-			"product_id",
+			"productId",
 			"code",
 			"name",
 			"quantity",
-			"price_at_sale",
+			"priceAtSale",
 		],
 	});
 

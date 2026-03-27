@@ -23,12 +23,12 @@ export async function exportSalesExcel(date?: {
 	const itemsSheet = XLSX.utils.json_to_sheet(items, {
 		header: [
 			"id",
-			"sale_id",
-			"product_id",
+			"saleId",
+			"productId",
 			"code",
 			"name",
 			"quantity",
-			"price_at_sale",
+			"priceAtSale",
 		],
 	});
 	XLSX.utils.book_append_sheet(workbook, itemsSheet, "SaleItems");

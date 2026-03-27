@@ -103,7 +103,7 @@ export const useRegistryActions = (
 				i === rowIndex
 					? {
 							...row,
-							product_id: product.id,
+							productId: product.id,
 							code: String(product.code),
 							name: product.name,
 							price: product.price,
