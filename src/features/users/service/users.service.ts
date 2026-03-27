@@ -16,11 +16,13 @@ export const createUserService = (deps: UserServiceDeps) => {
 		},
 
 		async createUser(credentials: UserCredentials) {
+			console.log("1");
 			const userWithId: CreateUser = {
 				id: uuidv4(),
 				username: credentials.username,
 				password: credentials.password,
 			};
+			console.log("2");
 			return repo.createUser(userWithId);
 		},
 
