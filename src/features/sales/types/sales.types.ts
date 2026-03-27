@@ -23,7 +23,7 @@ export interface SaleItem {
 	sale_id: number;
 	product_id: number;
 	quantity: number;
-	price_at_sale: number;
+	priceAtSale: number;
 	name?: string;
 	code?: string;
 }

@@ -63,7 +63,7 @@ const SaleDialog = ({
 
 	const totalSale =
 		saleItems?.reduce(
-			(sum, item) => sum + item.price_at_sale * item.quantity,
+			(sum, item) => sum + item.priceAtSale * item.quantity,
 			0,
 		) ?? 0;
 
@@ -97,6 +97,8 @@ const SaleDialog = ({
 		}
 	};
 
+	console.log(saleItems);
+
 	return (
 		<>
 			<Dialog open={open} onOpenChange={onOpenChange}>
@@ -126,9 +128,9 @@ const SaleDialog = ({
 												<TableCell>{item.code}</TableCell>
 												<TableCell>{item.name}</TableCell>
 												<TableCell>{item.quantity}</TableCell>
-												<TableCell>${item.price_at_sale}</TableCell>
+												<TableCell>S/{item.priceAtSale}</TableCell>
 												<TableCell>
-													S/.{(item.price_at_sale * item.quantity).toFixed(2)}
+													S/.{(item.priceAtSale * item.quantity).toFixed(2)}
 												</TableCell>
 											</TableRow>
 										))}
