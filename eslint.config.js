@@ -9,6 +9,15 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 //  tseslint.configs.strictTypeChecked,
 //  tseslint.configs.stylisticTypeChecked,
 
+// languageOptions: {
+//       // parserOptions: {
+//       //   project: ['./tsconfig.node.json', './tsconfig.app.json'],
+//       //   tsconfigRootDir: import.meta.dirname,
+//       // },
+//       ecmaVersion: 2020,
+//       globals: globals.browser,
+//     },
+
 export default defineConfig([
   globalIgnores(['dist']),
   {
@@ -20,10 +29,6 @@ export default defineConfig([
       reactRefresh.configs.vite,
     ],
     languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
       ecmaVersion: 2020,
       globals: globals.browser,
     },
