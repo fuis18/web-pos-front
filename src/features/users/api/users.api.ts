@@ -7,11 +7,9 @@ export const getUser = async (credentials: UserCredentials) => {
 };
 
 export const createUser = async (user: CreateUser) => {
-	console.log("3");
 	const res = await api.post<{ id: string }>("/users", {
 		username: user.username,
 		password: user.password,
 	});
-	console.log("4");
 	return Number(res.id) || 0;
 };

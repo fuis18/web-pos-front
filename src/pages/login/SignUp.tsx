@@ -33,12 +33,10 @@ const SignUp = () => {
 		try {
 			setSuccessMessage("");
 			const parsed = userSchema.parse(data);
-			console.log("0");
 			await userService.createUser({
 				username: parsed.username,
 				password: parsed.password,
 			});
-			console.log("5");
 
 			form.reset();
 			setCanGoToLogin(true);
