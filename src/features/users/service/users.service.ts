@@ -1,6 +1,7 @@
+import { CONFIG } from "@/constants/config";
 import * as repo from "../api/users.api";
 import type { CreateUser, UserCredentials } from "../types/users.types";
-import { CONFIG } from "../../../constants/config";
+import { v4 as uuidv4 } from "uuid";
 
 type TokenValidator = (token: string) => boolean | Promise<boolean>;
 
@@ -16,7 +17,7 @@ export const createUserService = (deps: UserServiceDeps) => {
 
 		async createUser(credentials: UserCredentials) {
 			const userWithId: CreateUser = {
-				id: crypto.randomUUID(),
+				id: uuidv4(),
 				username: credentials.username,
 				password: credentials.password,
 			};
