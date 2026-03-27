@@ -3,16 +3,13 @@ async function request<T>(
 	url: string,
 	body?: object,
 ): Promise<T> {
-	console.log("3.4");
+	//TODO: Configurar bien en env
 	const fullUrl = `http://web-pos-backend-vxrrd4-1172b8-144-225-147-25.traefik.me${url}`;
-	console.log(fullUrl);
 	const res = await fetch(fullUrl, {
 		method,
 		headers: body !== undefined ? { "Content-Type": "application/json" } : {},
 		body: body !== undefined ? JSON.stringify(body) : undefined,
 	});
-
-	console.log("3.5");
 
 	if (!res.ok) {
 		const text = await res.text();
@@ -20,10 +17,7 @@ async function request<T>(
 		throw new Error(`API ${res.status}: ${text}`);
 	}
 
-	console.log("3.8");
-
 	const text = await res.text();
-	console.log(text);
 	return JSON.parse(text) as T;
 }
 
@@ -41,8 +35,6 @@ export const api = {
 		return request<T>("GET", url + toQuery(params ?? {}));
 	},
 	post<T>(url: string, body?: object): Promise<T> {
-		console.log("3.2");
-		console.log(url, body);
 		return request<T>("POST", url, body);
 	},
 	patch<T>(url: string, body?: object): Promise<T> {
