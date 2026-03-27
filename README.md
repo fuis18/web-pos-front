@@ -10,7 +10,7 @@
 
 Interfaz tipo **POS (Point of Sale)** para la gestión de ventas y productos, pensada para negocios como restaurantes o tiendas. Construida con herramientas modernas y de alto rendimiento.
 
-> 🔑 **Token de acceso demo:** `123456` — configurable en `src/constants/config.ts`
+> 🔑 **Token de acceso demo:** `130285` — configurable en `src/constants/config.ts`
 
 |                | URL                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------ |
