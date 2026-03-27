@@ -31,7 +31,9 @@ Interfaz tipo **POS (Point of Sale)** para la gestión de ventas y productos, pe
 
 ## Super Importante
 
-Esta es una web refactorizada de una aplicación [que yo hice](https://github.com/fuis18/app-pos) hace poco para un familiar, y cuando anunciaste el hackathon, se me ocurrio dividirla para la web.
+Este proyecto lo inicie como una aplicación para un familiar y cuando anunciaste el hackathon, se me ocurrió dividirla para el VPS (web).
+Así que estuve trabajando en ella antes de anunciar el hackathon, pero recién la pude terminar.
+[APP POS](https://github.com/fuis18/app-pos)
 
 ## Breve historia para MIDU
 
