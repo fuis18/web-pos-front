@@ -4,11 +4,14 @@ async function request<T>(
 	body?: object,
 ): Promise<T> {
 	const fullUrl = `${import.meta.env.VITE_API_URL}${url}`;
+	console.log(fullUrl);
 	const res = await fetch(fullUrl, {
 		method,
 		headers: body !== undefined ? { "Content-Type": "application/json" } : {},
 		body: body !== undefined ? JSON.stringify(body) : undefined,
 	});
+
+	console.log("3.5");
 
 	if (!res.ok) {
 		const text = await res.text();
@@ -16,7 +19,10 @@ async function request<T>(
 		throw new Error(`API ${res.status}: ${text}`);
 	}
 
+	console.log("3.8");
+
 	const text = await res.text();
+	console.log(text);
 	return JSON.parse(text) as T;
 }
 
