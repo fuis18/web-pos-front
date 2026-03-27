@@ -7,6 +7,7 @@ let shiftHeld = false;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function CheckHeader({ table }: HeaderContext<any, unknown>) {
+	"use no memo";
 	const checked =
 		table.getIsAllPageRowsSelected() ||
 		(table.getIsSomePageRowsSelected() && "indeterminate");
@@ -25,6 +26,7 @@ export function CheckHeader({ table }: HeaderContext<any, unknown>) {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function CheckCell({ row, table }: CellContext<any, unknown>) {
+	"use no memo";
 	const handleClick = (e: React.MouseEvent) => {
 		shiftHeld = e.shiftKey;
 	};
