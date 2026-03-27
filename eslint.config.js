@@ -7,6 +7,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 
 //  tseslint.configs.strictTypeChecked,
 //  tseslint.configs.stylisticTypeChecked,
+// tseslint.configs.recommendedTypeChecked,
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -17,7 +18,6 @@ export default defineConfig([
       tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
-      tseslint.configs.recommendedTypeChecked,
     ],
     languageOptions: {
       parserOptions: {
