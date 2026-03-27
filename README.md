@@ -1,6 +1,6 @@
 # Una web tipo POS
 
-![Vite](https://img.shields.io/badge/Vite-5.x-646cff?logo=vite&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8.x-646cff?logo=vite&logoColor=white)
 ![Bun](https://img.shields.io/badge/Bun-runtime-black?logo=bun)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6?logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=black)
