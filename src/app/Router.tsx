@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import App from "./App";
 
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, useEffect } from "react";
 import { useUserStore } from "@/store/userStore";
 
 const Registry = lazy(() => import("@/pages/Registry"));
@@ -46,30 +46,28 @@ const TokenGuard = () => {
 function Router() {
 	return (
 		<BrowserRouter>
-			<Suspense fallback={<div>Loading...</div>}>
-				<TokenResetWatcher />
-				<Routes>
-					<Route element={<App />}>
-						<Route path="/" element={<Registry />} />
+			<TokenResetWatcher />
+			<Routes>
+				<Route element={<App />}>
+					<Route path="/" element={<Registry />} />
 
-						<Route path="/products">
-							<Route index element={<Products />} />
-						</Route>
+					<Route path="/products">
+						<Route index element={<Products />} />
+					</Route>
 
-						<Route path="/sales">
-							<Route index element={<Sales />} />
-						</Route>
+					<Route path="/sales">
+						<Route index element={<Sales />} />
+					</Route>
 
-						<Route path="/login">
-							<Route index element={<Login />} />
-							<Route path="token" element={<Token />} />
-							<Route element={<TokenGuard />}>
-								<Route path="signup" element={<SignIn />} />
-							</Route>
+					<Route path="/login">
+						<Route index element={<Login />} />
+						<Route path="token" element={<Token />} />
+						<Route element={<TokenGuard />}>
+							<Route path="signup" element={<SignIn />} />
 						</Route>
 					</Route>
-				</Routes>
-			</Suspense>
+				</Route>
+			</Routes>
 		</BrowserRouter>
 	);
 }
