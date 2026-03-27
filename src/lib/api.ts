@@ -3,6 +3,7 @@ async function request<T>(
 	url: string,
 	body?: object,
 ): Promise<T> {
+	console.log("3.4");
 	const fullUrl = `${import.meta.env.VITE_API_URL}${url}`;
 	console.log(fullUrl);
 	const res = await fetch(fullUrl, {
@@ -41,6 +42,7 @@ export const api = {
 	},
 	post<T>(url: string, body?: object): Promise<T> {
 		console.log("3.2");
+		console.log(url, body);
 		return request<T>("POST", url, body);
 	},
 	patch<T>(url: string, body?: object): Promise<T> {
