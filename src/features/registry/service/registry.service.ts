@@ -8,13 +8,13 @@ export const buildSaleFromRegistry = (
 	total: number,
 ): CreateSale | null => {
 	const validRows = rows.filter(
-		(row) => row.product_id && row.quantity > 0 && row.price > 0,
+		(row) => row.productId && row.quantity > 0 && row.price > 0,
 	);
 
 	if (validRows.length === 0) return null;
 
 	const items = validRows.map((row) => ({
-		product_id: row.product_id!,
+		productId: row.productId!,
 		quantity: row.quantity,
 		price: row.price,
 	}));

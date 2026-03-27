@@ -8,7 +8,7 @@ export interface Sale {
 }
 
 export interface CreateSaleItem {
-	product_id: number;
+	productId: number;
 	quantity: number;
 	price: number;
 }
@@ -20,8 +20,8 @@ export interface CreateSale {
 
 export interface SaleItem {
 	id: number;
-	sale_id: number;
-	product_id: number;
+	saleId: number;
+	productId: number;
 	quantity: number;
 	priceAtSale: number;
 	name?: string;
@@ -30,9 +30,9 @@ export interface SaleItem {
 
 export interface SaleReport {
 	id: number;
-	sale_id: number;
+	saleId: number;
 	reason: string;
-	reported_at: string;
+	reportedAt: string;
 }
 
 export interface SalesTableProps {

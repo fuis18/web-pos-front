@@ -3,8 +3,7 @@ import type { TableMeta } from "@tanstack/react-table";
 
 export interface Registry {
 	id: number;
-	product_id?: number;
-	// status: boolean;
+	productId?: number;
 	code: string;
 	quantity: number;
 	name: string;

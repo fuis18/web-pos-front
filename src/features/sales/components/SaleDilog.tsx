@@ -172,7 +172,7 @@ const SaleDialog = ({
 							</p>
 							<p>
 								<span className="font-semibold">Hora: </span>
-								{new Date(report.reported_at + "Z").toLocaleString("es-PE", {
+								{new Date(report.reportedAt).toLocaleString("es-PE", {
 									timeZone: "America/Lima",
 									dateStyle: "short",
 									timeStyle: "short",
