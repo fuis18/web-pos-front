@@ -11,11 +11,11 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import {
-	getProductByCode,
-	createProduct,
-	updateProduct,
+	type ImportSummary,
+	importProducts,
 } from "@/features/products/api/products.api";
 import { parseProductsFile } from "../service/parseProductsFile";
+import { mapToImportRows } from "../service/mapImport";
 
 interface ImportDialogProps {
 	children?: React.ReactNode;
@@ -31,17 +31,14 @@ function isAcceptedFile(file: File): boolean {
 	);
 }
 
-const ImportDialog = ({
-	children,
-	onFileUpload,
-	onImportSuccess,
-}: ImportDialogProps) => {
+const ImportDialog = ({ children, onImportSuccess }: ImportDialogProps) => {
 	"use no memo";
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [open, setOpen] = useState(false);
 	const [file, setFile] = useState<File | null>(null);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
+	const [summary, setSummary] = useState<ImportSummary | null>(null);
 	const [dragging, setDragging] = useState(false);
 
 	const selectFile = (f: File) => {
@@ -50,8 +47,8 @@ const ImportDialog = ({
 			return;
 		}
 		setError(null);
+		setSummary(null);
 		setFile(f);
-		onFileUpload?.(f);
 	};
 
 	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,61 +75,41 @@ const ImportDialog = ({
 
 	const handleImport = async () => {
 		if (!file) return;
-
 		setLoading(true);
 		setError(null);
+		setSummary(null);
 
 		try {
-			const rows = await parseProductsFile(file);
+			const rawRows = await parseProductsFile(file);
 
-			let imported = 0;
-			let updated = 0;
-			let skipped = 0;
+			const rows = mapToImportRows(rawRows);
 
-			for (const row of rows) {
-				const code = Number(row.code);
-				const name = row.name;
-				const price = Number(row.price);
+			const result = await importProducts(rows);
 
-				const existing = await getProductByCode(code);
-
-				if (existing) {
-					const sameName = existing.name === name;
-					const samePrice = existing.price === price;
-
-					if (sameName && samePrice) {
-						skipped++;
-						continue;
-					}
-
-					await updateProduct(existing.id, {
-						...(!sameName && { name }),
-						...(!samePrice && { price }),
-					});
-					updated++;
-					continue;
-				}
-
-				await createProduct({ code, name, price });
-				imported++;
-			}
-
-			alert(
-				`Importación completada: ${imported} importados, ${updated} actualizados, ${skipped} omitidos (sin cambios)`,
-			);
+			setSummary(result);
 			onImportSuccess?.();
-			setOpen(false);
-			setFile(null);
 		} catch (err) {
-			setError("Error al importar productos. Revisa tu archivo.");
-			console.error(err);
+			if (err instanceof Error) {
+				setError(err.message);
+			} else {
+				setError("Error al importar productos.");
+			}
 		} finally {
 			setLoading(false);
 		}
 	};
 
+	const handleClose = (next: boolean) => {
+		if (!next) {
+			setFile(null);
+			setError(null);
+			setSummary(null);
+		}
+		setOpen(next);
+	};
+
 	return (
-		<Dialog open={open} onOpenChange={setOpen}>
+		<Dialog open={open} onOpenChange={handleClose}>
 			<DialogTrigger asChild>{children}</DialogTrigger>
 
 			<DialogContent className="max-w-md">
@@ -172,11 +149,25 @@ const ImportDialog = ({
 						Archivo seleccionado: {file.name}
 					</p>
 				)}
+
 				{error && <p className="text-sm text-red-600">{error}</p>}
 
-				<Button disabled={!file || loading} onClick={handleImport}>
-					{loading ? "Importando..." : "Importar"}
-				</Button>
+				{summary && (
+					<div className="rounded border border-green-200 bg-green-50 p-3 text-sm text-green-800 space-y-1">
+						<p className="font-medium">Importación completada</p>
+						<ul className="list-disc list-inside">
+							<li>{summary.imported} importados</li>
+							<li>{summary.updated} actualizados</li>
+							<li>{summary.skipped} omitidos (sin cambios)</li>
+						</ul>
+					</div>
+				)}
+
+				{!summary && (
+					<Button disabled={!file || loading} onClick={handleImport}>
+						{loading ? "Importando..." : "Importar"}
+					</Button>
+				)}
 			</DialogContent>
 		</Dialog>
 	);

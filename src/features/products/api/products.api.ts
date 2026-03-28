@@ -6,6 +6,25 @@ import type {
 	UpdateProduct,
 } from "../types/products.types";
 
+export interface ImportRow {
+	code: number;
+	name: string;
+	price: number;
+}
+
+export interface ImportSummary {
+	imported: number;
+	updated: number;
+	skipped: number;
+}
+
+// ─── Import ────────────────────────────────────────────────────────────────
+
+export const importProducts = (rows: ImportRow[]): Promise<ImportSummary> =>
+	api.post<ImportSummary>("/products/import", { rows });
+
+// ─── Queries ───────────────────────────────────────────────────────────────
+
 export const getProductByCode = (code: number) =>
 	api.get<ProductListItem | null>(`/products/search/code/${code}`);
 
