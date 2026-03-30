@@ -1,9 +1,9 @@
 // src/features/registry/components/table/CodeRow.tsx
 import { Input } from "@/components/ui/input";
 import { getProductByCode } from "@/features/products/api/products.api";
+import useFocusableCell from "@/features/registry/hooks/useFocusableCell";
 import type { Registry } from "@/features/registry/types/registry.types";
 import type { CellContext } from "@tanstack/react-table";
-import useFocusableCell from "../hooks/useFocusableCell";
 
 export default function CodeCell({
 	row,
@@ -23,6 +23,7 @@ export default function CodeCell({
 		<Input
 			value={value}
 			ref={ref}
+			aria-label={`Código del producto, fila ${row.index + 1}`}
 			onChange={(e) => {
 				meta?.updateCell?.(row.index, "code", e.target.value);
 			}}
@@ -51,7 +52,7 @@ export default function CodeCell({
 					const code = Number(inputValue);
 					if (Number.isNaN(code)) return;
 
-				const product = await getProductByCode(code);
+					const product = await getProductByCode(code);
 
 					if (!product) return;
 

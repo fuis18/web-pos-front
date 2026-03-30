@@ -11,10 +11,10 @@ import {
 	getProductByName,
 } from "@/features/products/api/products.api";
 import type { ProductListItem } from "@/features/products/types/products.types";
+import useFocusableCell from "@/features/registry/hooks/useFocusableCell";
 import type { Registry } from "@/features/registry/types/registry.types";
 import type { CellContext } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import useFocusableCell from "../hooks/useFocusableCell";
 
 export default function NameCell({
 	row,
@@ -46,6 +46,7 @@ export default function NameCell({
 			<ComboboxInput
 				ref={ref}
 				value={value}
+				aria-label="Product name"
 				onChange={(e) => {
 					meta?.updateCell?.(row.index, "name", e.target.value);
 				}}

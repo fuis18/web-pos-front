@@ -15,7 +15,7 @@ const UserMenu = () => {
 
 	if (!user) {
 		return (
-			<Button>
+			<Button asChild>
 				<Link to="/login">Iniciar Sesión</Link>
 			</Button>
 		);
@@ -24,7 +24,7 @@ const UserMenu = () => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button>
+				<Button asChild>
 					<Link to="/login">{user.username.toUpperCase()}</Link>
 				</Button>
 			</DropdownMenuTrigger>

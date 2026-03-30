@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import { flexRender } from "@tanstack/react-table";
 import type { RegistryTableProps } from "@/features/registry/types/registry.types";
-import useRegistryTable from "./table/hooks/useRegistryTable";
+import useRegistryTable from "../hooks/useRegistryTable";
 
 const RegistryTable = ({
 	data,

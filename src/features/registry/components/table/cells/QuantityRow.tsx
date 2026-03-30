@@ -15,6 +15,7 @@ export default function QuantityCell({
 			type="number"
 			value={value}
 			min="0"
+			aria-label={`Cantidad, fila ${row.index + 1}`}
 			onChange={(e) => {
 				meta?.updateCell?.(row.index, "quantity", Number(e.target.value));
 			}}

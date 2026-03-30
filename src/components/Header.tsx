@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Moon, Sun } from "lucide-react";
-import UserMenu from "@/features/users/components/UserMenu";
 import { useThemeStore } from "@/store/themeStore";
+import UserMenu from "./UserMenu";
 
 const Header = () => {
 	const { theme, toggleTheme } = useThemeStore();
@@ -19,7 +19,14 @@ const Header = () => {
 				<Link to="/sales">Ventas</Link>
 			</Button>
 			<UserMenu />
-			<Button variant="outline" size="icon" onClick={toggleTheme}>
+			<Button
+				variant="outline"
+				size="icon"
+				onClick={toggleTheme}
+				aria-label={
+					theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+				}
+			>
 				{theme === "dark" ? (
 					<Sun className="h-4 w-4" />
 				) : (

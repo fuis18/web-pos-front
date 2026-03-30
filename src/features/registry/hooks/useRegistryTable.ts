@@ -4,8 +4,8 @@ import {
 	type RowSelectionState,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import { columns } from "../registry-columns";
 import type { RegistryTableProps } from "@/features/registry/types/registry.types";
+import { columns } from "../components/table/registry-columns";
 
 const useRegistryTable = ({
 	data,
