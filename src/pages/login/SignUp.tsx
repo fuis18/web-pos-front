@@ -93,13 +93,19 @@ const SignUp = () => {
 						</p>
 					)}
 					<span>
-						<Button type="submit" disabled={isSubmitting}>
+						<Button
+							type="submit"
+							size="lg"
+							className="min-h-[44px]"
+							disabled={isSubmitting}
+						>
 							{isSubmitting ? "Registrando..." : "Sign Up"}
 						</Button>
 						<Button
-							className="ml-2"
 							variant="outline"
 							type="button"
+							size="lg"
+							className="min-h-[44px] cursor-pointer"
 							disabled={!canGoToLogin}
 							onClick={() => {
 								navigate("/login");

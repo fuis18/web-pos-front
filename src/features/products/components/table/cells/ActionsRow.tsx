@@ -40,7 +40,11 @@ export default function ActionsCell({
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="ghost" className="h-8 w-8 p-0">
+				<Button
+					variant="ghost"
+					className="h-8 w-8 p-0"
+					aria-label={`Acciones para ${product.name}`}
+				>
 					<MoreHorizontal />
 				</Button>
 			</DropdownMenuTrigger>

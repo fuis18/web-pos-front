@@ -53,7 +53,11 @@ const PagTable = ({ page, setPage, totalPages }: PagTableProps) => {
 				{/* PREVIOUS */}
 				{page > 1 && (
 					<PaginationItem>
-						<PaginationPrevious onClick={() => setPage(page - 1)} />
+						<PaginationPrevious
+							href="#"
+							aria-label="Página anterior"
+							onClick={() => setPage(page - 1)}
+						/>
 					</PaginationItem>
 				)}
 
@@ -64,7 +68,10 @@ const PagTable = ({ page, setPage, totalPages }: PagTableProps) => {
 							<PaginationEllipsis />
 						) : (
 							<PaginationLink
+								href="#"
 								isActive={page === item}
+								aria-label={`Ir a página ${item}`}
+								aria-current={page === item ? "page" : undefined}
 								onClick={() => setPage(item)}
 							>
 								{item}
@@ -76,7 +83,11 @@ const PagTable = ({ page, setPage, totalPages }: PagTableProps) => {
 				{/* NEXT */}
 				{page < totalPages && (
 					<PaginationItem>
-						<PaginationNext onClick={() => setPage(page + 1)} />
+						<PaginationNext
+							href="#"
+							aria-label="Página siguiente"
+							onClick={() => setPage(page + 1)}
+						/>
 					</PaginationItem>
 				)}
 			</PaginationContent>
