@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block auth routes from indexing
+Disallow: /login/
+Disallow: /login/token
+Disallow: /login/signup
+
+Sitemap: http://web-pos-frontend-9h2hs3-b67272-144-225-147-25.traefik.me/
